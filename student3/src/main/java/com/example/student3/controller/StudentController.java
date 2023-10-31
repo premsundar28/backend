@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,6 +82,28 @@ public class StudentController {
     }
 
 
+    @GetMapping("/getStudentById")
+    @PreAuthorize("hasAuthority('admin')")
+    public Student getStudentDetailsByUserId(@RequestParam String studentId) {
+        return studentRepository.findById(studentId).orElse(null);
+    }
+
+    @GetMapping("/studentsByCGPA")
+    public List<Student> getStudentsByCGPA(@RequestParam("cgpa") String cgpa) {
+        return studentRepository.findByCGPAGreaterThanEqual(cgpa);
+    }
+
+    @GetMapping("/studentIdsBySkill")
+    public List<String> getStudentIdsBySkill(@RequestParam("skill") String skill) {
+        List<Skill> skillsWithMatchingName = skillRepository.findBySkill(skill);
+        List<String> studentIds = new ArrayList<>();
+
+        for (Skill s : skillsWithMatchingName) {
+            studentIds.add(s.getStudentId());
+        }
+
+        return studentIds;
+    }
 
     @PostMapping("/newUser")
     public String addNewUser(@RequestBody UserInfo userInfo){
@@ -100,7 +123,30 @@ public class StudentController {
 
     }
 
+    @GetMapping("/studentIdsByName")
+    public List<String> getStudentIdsByName(@RequestParam("name") String name) {
+        List<Certification> certificatesWithMatchingName = certificateRepository.findByName(name);
+        List<String> studentIds = new ArrayList<>();
 
+        for (Certification c : certificatesWithMatchingName) {
+            studentIds.add(c.getStudentId());
+        }
+
+        return studentIds;
+    }
+
+
+    @GetMapping("/studentIdsByInternshipDomain")
+    public List<String> getStudentIdsByInternshipDomain(@RequestParam("domain") String domain) {
+        List<Internship> internshipsWithMatchingDomain = internshipRepository.findByDomain(domain);
+        List<String> studentIds = new ArrayList<>();
+
+        for (Internship internship : internshipsWithMatchingDomain) {
+            studentIds.add(internship.getStudentId());
+        }
+
+        return studentIds;
+    }
 
 
 }

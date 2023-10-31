@@ -36,4 +36,7 @@ public class Internship {
 
     @Column(name = "verification")
     private String verification;
+
+    @Column(name = "domain")
+    private String domain;
 }

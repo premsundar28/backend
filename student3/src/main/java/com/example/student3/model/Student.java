@@ -18,4 +18,5 @@ public class Student {
     private String batch;
     private String emailId;
     private String mobile;
+    private String CGPA;
 }
