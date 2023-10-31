@@ -5,13 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Experience {
+@AllArgsConstructor
+public class RecentEducation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +18,8 @@ public class Experience {
     @Column(name = "userId")
     private String userId;
 
-    private String experienceType;
-    private Date exFrom;
-    private Date exTo;
-    private String company;
-    private String designation;
+    private String type;
+    private String issuedBy;
 
 
 }

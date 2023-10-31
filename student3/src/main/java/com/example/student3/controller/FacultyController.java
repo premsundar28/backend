@@ -1,10 +1,10 @@
 package com.example.student3.controller;
 
-import com.example.student3.model.Experience;
-import com.example.student3.model.Faculty;
-import com.example.student3.model.Student;
+import com.example.student3.model.*;
 import com.example.student3.repository.ExperienceRepository;
 import com.example.student3.repository.FacultyRepository;
+import com.example.student3.repository.RecentEducationRepository;
+import com.example.student3.repository.SocialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,12 @@ public class FacultyController {
     @Autowired
     ExperienceRepository experienceRepository;
 
+    @Autowired
+    SocialRepository socialRepository;
+
+    @Autowired
+    RecentEducationRepository recentEducationRepository;
+
     @PostMapping("/addFaculty")
     @PreAuthorize("hasAuthority('admin')")
     public void addStudent(@RequestBody Faculty faculty) {
@@ -32,4 +38,15 @@ public class FacultyController {
         experienceRepository.save(experience);
     }
 
+    @PostMapping("/addSocial")
+    @PreAuthorize("hasAuthority('admin')")
+    public void addStudent(@RequestBody Social social) {
+        socialRepository.save(social);
+    }
+
+    @PostMapping("/addEducation")
+    @PreAuthorize("hasAuthority('admin')")
+    public void addStudent(@RequestBody RecentEducation recentEducation) {
+        recentEducationRepository.save(recentEducation);
+    }
 }
