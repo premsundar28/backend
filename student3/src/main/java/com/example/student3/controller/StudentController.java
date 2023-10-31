@@ -1,5 +1,6 @@
 package com.example.student3.controller;
 
+import com.example.student3.model.Faculty;
 import com.example.student3.service.JwtService;
 import com.example.student3.Entity.UserInfo;
 import com.example.student3.model.AuthRequest;
@@ -79,6 +80,8 @@ public class StudentController {
 
 
     }
+
+
 
 
 }

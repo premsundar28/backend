@@ -70,6 +70,31 @@ public class FacultyController {
         return experienceRepository.findAll();
     }
 
+    @GetMapping("/getFacultyById")
+    @PreAuthorize("hasAuthority('admin')")
+    public Faculty getFacultyDetailsByUserId(@RequestParam String userId) {
+        return facultyRepository.findById(userId).orElse(null);
+    }
+
+
+    @GetMapping("/getExperienceByUserId")
+    @PreAuthorize("hasAuthority('admin')")
+    public List<Experience> getExperienceByUserId(@RequestParam String userId) {
+        return experienceRepository.findByUserId(userId);
+    }
+
+
+    @GetMapping("/getFacultySocialById")
+    @PreAuthorize("hasAuthority('admin')")
+    public Social getFacultySocialDetailsByUserId(@RequestParam String userId) {
+        return socialRepository.findByUserId(userId);
+    }
+
+    @GetMapping("/getFacultyEducationById")
+    @PreAuthorize("hasAuthority('admin')")
+    public RecentEducation getFacultyEducationalDetailsByUserId(@RequestParam String userId) {
+        return recentEducationRepository.findByUserId(userId);
+    }
 
 
 }
