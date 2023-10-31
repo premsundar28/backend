@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/Faculty")
@@ -49,4 +51,25 @@ public class FacultyController {
     public void addStudent(@RequestBody RecentEducation recentEducation) {
         recentEducationRepository.save(recentEducation);
     }
+
+    @GetMapping("/recent")
+    @PreAuthorize("hasAuthority('admin')")
+    public List<RecentEducation> getAllRecentEducations() {
+        return recentEducationRepository.findAll();
+    }
+
+    @GetMapping("/social")
+    @PreAuthorize("hasAuthority('admin')")
+    public List<Social> getAllSocial() {
+        return socialRepository.findAll();
+    }
+
+    @GetMapping("/experience")
+    @PreAuthorize("hasAuthority('admin')")
+    public List<Experience> getAllExperience(){
+        return experienceRepository.findAll();
+    }
+
+
+
 }
